@@ -1,0 +1,20 @@
+// Get elements
+const elements = document.querySelectorAll('[data-aid]');
+
+// Extract data-aid values and construct URLs
+const urls = [];
+elements.forEach(el => {
+  const dataAid = el.dataset.aid;
+  const url = `https://www.bilibili.com/video/${dataAid}/`;
+  urls.push(url);
+});
+
+// Join URLs into text
+const text = urls.join('\n');
+
+// Trigger download 
+const blob = new Blob([text], {type:'text/plain'});
+const a = document.createElement('a');
+a.href = URL.createObjectURL(blob);
+a.download = 'urls.txt';
+a.click();
